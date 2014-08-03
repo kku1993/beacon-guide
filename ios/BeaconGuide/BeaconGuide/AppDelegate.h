@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LoginViewController.h"
+#import "SearchViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

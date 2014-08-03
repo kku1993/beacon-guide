@@ -9,6 +9,7 @@
 #import "SearchViewController.h"
 
 @interface SearchViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *selectionTableView;
 
 @end
 
@@ -27,12 +28,31 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.userInteractionEnabled = TRUE;
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    self.selectionTableView.tableHeaderView= searchBar;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    CGPoint contentOffset = self.selectionTableView.contentOffset;
+    contentOffset.y += CGRectGetHeight(self.selectionTableView.tableHeaderView.frame);
+    self.selectionTableView.contentOffset = contentOffset;
+    [self.view endEditing:YES];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    // Do the search...
 }
 
 @end
