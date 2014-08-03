@@ -84,25 +84,15 @@
                                                                                        CGRectGetMidY(topBar.frame) - 100 / 2.0f,
                                                                                        100,
                                                                                        100)];
-    [topBar addSubview:self.progressView];
-    [NSTimer scheduledTimerWithTimeInterval:0.1
-                                     target:self
-                                   selector:@selector(progressUpdate)
-                                   userInfo:nil
-                                    repeats:YES];
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMidY(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetMidY(self.view.bounds))];
     self.progress = 0;
+    [topBar addSubview:self.progressView];
+
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMidY(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetMidY(self.view.bounds))];
+    
+    //TODO: add map to bottomView
     
     [self.view addSubview:topBar];
     [self.view addSubview:bottomView];
-}
-
--(void)progressUpdate {
-    self.progress += 0.1;
-    if(self.progress > 1.0f) {
-        return;
-    }
-    [self.progressView setProgress:self.progress animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,26 +111,57 @@
     if([beacons count] > 0) {
         [self.beaconManager stopMonitoringForRegion:self.scanRegion];
         
-        ESTBeacon* closestBeacon = [beacons objectAtIndex:0];
-        //NSUUID *UUID = closestBeacon.proximityUUID;
-        NSNumber *majorNumber = closestBeacon.major;
-        NSNumber *minorNumber = closestBeacon.minor;
-        
-        
-        if([majorNumber intValue] == [self.waypointBeaconData[@"majorNumber"] intValue] && [minorNumber intValue] == [self.waypointBeaconData[@"minorNumber"] intValue]) {
-            self.currentBeaconNum++;
+        // find the target beacon
+        ESTBeacon *target = nil;
+        for(int i = 0; i < [beacons count]; i++) {
+            ESTBeacon *b = beacons[i];
             
-            if(self.currentBeaconNum == [self.path count]) {
-                // reached target
-                NSLog(@"Reached Target");
-                self.waypointBeaconData = nil;
-                [self.beaconManager stopMonitoringForRegion:self.scanRegion];
-                return;
+            NSNumber *majorNumber = b.major;
+            NSNumber *minorNumber = b.minor;
+            if([majorNumber intValue] == [self.waypointBeaconData[@"majorNumber"] intValue] && [minorNumber intValue] == [self.waypointBeaconData[@"minorNumber"] intValue]) {
+                target = b;
+                break;
             }
-            
-            self.waypointBeaconData = self.building[@"beaconDetails"][[self.path[self.currentBeaconNum] intValue]];
         }
+        
+        
+        if(!target) {
+            NSLog(@"Error: Can't find target beacon");
+            [self.progressView setProgress:0];
+        }
+        
+        switch(target.proximity) {
+            case CLProximityUnknown:
+                [self.progressView setProgress:0];
+                break;
+            case CLProximityImmediate:
+                [self.progressView setProgress:1];
+                [self endNavigation];
+                break;
+            case CLProximityNear:
+            case CLProximityFar:
+                [self.progressView setProgress:[target.distance floatValue]/70.0f animated:YES];
+                break;
+                
+            default:
+                break;
+        }
+        
     }
+}
+
+- (void)endNavigation {
+    self.currentBeaconNum++;
+    
+    if(self.currentBeaconNum == [self.path count]) {
+        // reached target
+        NSLog(@"Reached Target");
+        self.waypointBeaconData = nil;
+        [self.beaconManager stopMonitoringForRegion:self.scanRegion];
+        return;
+    }
+    
+    self.waypointBeaconData = self.building[@"beaconDetails"][[self.path[self.currentBeaconNum] intValue]];
 }
 
 
