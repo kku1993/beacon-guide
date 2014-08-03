@@ -10,8 +10,8 @@ Beacon Guide
 {
   "beacon": {
     "UUID": "...",
-    "majorNumber": "...",
-    "minorNumber": "..."
+    "majorNumber": 1,
+    "minorNumber": 2
   }
 }
 ```
@@ -37,8 +37,8 @@ Beacon Guide
     {
       "beaconID": "1",
       "UUID": "123",
-      "majorNumber": "1",
-      "minorNumber": "1",
+      "majorNumber": 1,
+      "minorNumber": 1,
       "description": "Art 1",
       "buildingID": "b1",
       "position": {

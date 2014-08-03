@@ -2,8 +2,8 @@
   "1": {
     "beaconID": "1",
     "UUID": "123",
-    "majorNumber": "1",
-    "minorNumber": "1",
+    "majorNumber": 1,
+    "minorNumber": 1,
     "description": "Art 1",
     "buildingID": "b1",
     "position": {
@@ -14,8 +14,8 @@
   "2": {
     "beaconID": "2",
     "UUID": "123",
-    "majorNumber": "2",
-    "minorNumber": "2",
+    "majorNumber": 2,
+    "minorNumber": 2,
     "description": "Art 2",
     "buildingID": "b1",
     "position": {
@@ -26,8 +26,8 @@
   "3": {
     "beaconID": "3",
     "UUID": "123",
-    "majorNumber": "3",
-    "minorNumber": "3",
+    "majorNumber": 3,
+    "minorNumber": 3,
     "description": "Art 3",
     "buildingID": "b1",
     "position": {
