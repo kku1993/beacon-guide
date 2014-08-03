@@ -7,7 +7,6 @@
 //
 
 #import "SearchViewController.h"
-#import "categoryTableViewCell.h"
 #import "GoogleMaps/GoogleMaps.h"
 #import "NavViewController.h"
 #import "MapViewController.h"
