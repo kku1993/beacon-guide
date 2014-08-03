@@ -10,6 +10,8 @@
 #import "SearchViewController.h"
 #import "THProgressView.h"
 
+static const CGSize progressViewSize = { 200.0f, 30.0f };
+
 @interface NavViewController ()
 
 @property (nonatomic,strong) UIButton *displaySearchView;
@@ -57,11 +59,11 @@
     [self.view addSubview:self.displaySearchView];
     
     
-    CGRect rect = CGRectMake(10, 180, 300, 44);
-    THProgressView *progressView = [[THProgressView alloc] initWithFrame:rect];
-    progressView.borderTintColor = [UIColor whiteColor];
-    progressView.progressTintColor = [UIColor whiteColor];
-    [progressView setProgress:0.5f animated:YES];
+//    CGRect rect = CGRectMake(10, 180, 300, 44);
+//    THProgressView *progressView = [[THProgressView alloc] initWithFrame:rect];
+//    progressView.borderTintColor = [UIColor whiteColor];
+//    progressView.progressTintColor = [UIColor whiteColor];
+//    [progressView setProgress:0.5f animated:YES];
     
     
     
@@ -69,7 +71,17 @@
 //    self.progressBar.progress = 0.0;
 //    [self performSelectorInBackground:@selector(progressUpdate) withObject:nil];
 //    [self.view addSubview:self.progressBar];
-
+    
+    
+    UIView *topBar =[[UIView alloc]initWithFrame:CGRectMake(0,0,CGRectGetWidth(self.view.bounds), CGRectGetMidY(self.view.bounds))];
+    THProgressView *topProgressView = [[THProgressView alloc] initWithFrame:CGRectMake(CGRectGetMidX(topBar.frame) - progressViewSize.width / 2.0f,
+                                                                                       CGRectGetMidY(topBar.frame) - progressViewSize.height / 2.0f,
+                                                                                       progressViewSize.width,
+                                                                                       progressViewSize.height)];
+    topProgressView.borderTintColor = [UIColor whiteColor];
+    topProgressView.progressTintColor = [UIColor whiteColor];
+    [topBar addSubview:topProgressView];
+    [self.view addSubview:topBar];
 }
 
 
