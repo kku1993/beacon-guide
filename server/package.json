@@ -1,0 +1,25 @@
+{
+  "name": "beacon-guide",
+  "version": "0.0.1",
+  "description": "Indoor Navigation Using Beacons",
+  "author": "Kelly An, Kevin Ku",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kku1993/beacon-guide.git"
+  },
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.5.2",
+    "express": "^4.7.2",
+    "morgan": "^1.2.2"
+  },
+  "scripts": {
+    "start": "sudo node src/server.js"
+  },
+  "devDependencies": {
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,35 @@
+{
+  "1": {
+    "UUID": "",
+    "majorNumber": 123,
+    "minorNumber": 123,
+    "description": "Art 1",
+    "building": "b1",
+    "position": {
+      "lng": 123.456,
+      "lat": 23.234
+    }
+  },
+  "2": {
+    "UUID": "",
+    "majorNumber": 123,
+    "minorNumber": 123,
+    "description": "",
+    "building": "b1",
+    "position": {
+      "lng": 123.456,
+      "lat": 23.234
+    }
+  },
+  "3": {
+    "UUID": "",
+    "majorNumber": 123,
+    "minorNumber": 123,
+    "description": "",
+    "building": "b1",
+    "position": {
+      "lng": 123.456,
+      "lat": 23.234
+    }
+  }
+}
