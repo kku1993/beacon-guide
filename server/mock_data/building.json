@@ -1,8 +1,9 @@
 {
-  "id": "b1",
+  "buildingID": "b1",
   "name": "YC Building",
   "updateDate": 1407039110.205,
-  "beacons": {
+  "beacons": [ "1", "2", "3" ],
+  "beaconGraph": {
     "1": [ "2" ],
     "2": [ "1", "2" ],
     "3": [ "2" ]

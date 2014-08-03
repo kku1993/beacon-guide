@@ -1,32 +1,35 @@
 {
   "1": {
-    "UUID": "",
-    "majorNumber": 123,
-    "minorNumber": 123,
+    "beaconID": "1",
+    "UUID": "123",
+    "majorNumber": "1",
+    "minorNumber": "1",
     "description": "Art 1",
-    "building": "b1",
+    "buildingID": "b1",
     "position": {
       "lng": 123.456,
       "lat": 23.234
     }
   },
   "2": {
-    "UUID": "",
-    "majorNumber": 123,
-    "minorNumber": 123,
-    "description": "",
-    "building": "b1",
+    "beaconID": "2",
+    "UUID": "123",
+    "majorNumber": "2",
+    "minorNumber": "2",
+    "description": "Art 2",
+    "buildingID": "b1",
     "position": {
       "lng": 123.456,
       "lat": 23.234
     }
   },
   "3": {
-    "UUID": "",
-    "majorNumber": 123,
-    "minorNumber": 123,
-    "description": "",
-    "building": "b1",
+    "beaconID": "3",
+    "UUID": "123",
+    "majorNumber": "3",
+    "minorNumber": "3",
+    "description": "Art 3",
+    "buildingID": "b1",
     "position": {
       "lng": 123.456,
       "lat": 23.234

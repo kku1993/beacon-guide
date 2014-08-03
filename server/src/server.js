@@ -2,14 +2,15 @@ var express = require('express'),
     logger = require('morgan'),
     bodyParser = require('body-parser');
 
-var mockBuilding = require('../mock_data/building');
-var mockBeacons = require('../mock_data/beacons');
+var DB = require('./db');
 
 function isValidBeacon(data) {
   return (data.UUID && data.majorNumber && data.minorNumber);
 }
 
 function startServer() {
+  var db = new DB();
+
   var app = express();
 
   // set up middlware
@@ -21,7 +22,14 @@ function startServer() {
       res.status(400).end();
       return;
     }
-    res.json(mockBuilding);
+    db.getBeaconBuilding(req.body.beacon, function(err, building) {
+      if(err) {
+        res.status(404).end();
+        console.error(err);
+        return;
+      }
+      res.json(building);
+    });
   });
   app.post('/api/navigate', function(req, res) {
     if(!req.body.startBeacon || !req.body.endBeacon) {
