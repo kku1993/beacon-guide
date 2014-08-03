@@ -12,6 +12,8 @@
 #import "ESTBeaconManager.h"
 #import "ESTBeaconRegion.h"
 
+#import "MRProgress.h"
+
 @interface NavViewController : UIViewController <ESTBeaconManagerDelegate>
 
 - (id)initWithBuildingData:(NSDictionary *)building startBeaconID:(NSString *)startBeaconID endBeaconID:(NSString *)endBeaconID;
