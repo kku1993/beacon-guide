@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1B78F130198E1C940077AE84 /* BeaconGuideAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B78F12F198E1C940077AE84 /* BeaconGuideAPI.m */; };
+		1BBE3A61198E761300935FF3 /* BeaconCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE3A5F198E761300935FF3 /* BeaconCellTableViewCell.m */; };
+		1BBE3A62198E761300935FF3 /* BeaconCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BBE3A60198E761300935FF3 /* BeaconCellTableViewCell.xib */; };
 		491ED5658D954610A86DD1E5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 370A33CD190449448284AC79 /* libPods.a */; };
 		6C0ABFE4198DF80300E7B7C1 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0ABFE2198DF80300E7B7C1 /* MapViewController.m */; };
 		6C0ABFE5198DF80300E7B7C1 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C0ABFE3198DF80300E7B7C1 /* MapViewController.xib */; };
@@ -27,8 +29,6 @@
 		6C504365198DEEA400DF881F /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C504363198DEEA400DF881F /* LoginViewController.xib */; };
 		6C504369198DEF7100DF881F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C504367198DEF7100DF881F /* SearchViewController.m */; };
 		6C50436A198DEF7100DF881F /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C504368198DEF7100DF881F /* SearchViewController.xib */; };
-		6C5BEDE2198E0B3800368A60 /* categoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BEDE0198E0B3800368A60 /* categoryTableViewCell.m */; };
-		6C5BEDE3198E0B3800368A60 /* categoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C5BEDE1198E0B3800368A60 /* categoryTableViewCell.xib */; };
 		6C5BEDE5198E1F8000368A60 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5BEDE4198E1F8000368A60 /* GoogleMaps.framework */; };
 		6C5BEDE7198E202B00368A60 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6C5BEDE6198E202B00368A60 /* GoogleMaps.bundle */; };
 		6C5BEDE9198E21AB00368A60 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5BEDE8198E21AB00368A60 /* AVFoundation.framework */; };
@@ -59,6 +59,9 @@
 /* Begin PBXFileReference section */
 		1B78F12E198E1C940077AE84 /* BeaconGuideAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconGuideAPI.h; sourceTree = "<group>"; };
 		1B78F12F198E1C940077AE84 /* BeaconGuideAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconGuideAPI.m; sourceTree = "<group>"; };
+		1BBE3A5E198E761300935FF3 /* BeaconCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconCellTableViewCell.h; sourceTree = "<group>"; };
+		1BBE3A5F198E761300935FF3 /* BeaconCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconCellTableViewCell.m; sourceTree = "<group>"; };
+		1BBE3A60198E761300935FF3 /* BeaconCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BeaconCellTableViewCell.xib; sourceTree = "<group>"; };
 		370A33CD190449448284AC79 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		68084DF8348C4291B024D8EC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		6C0ABFE1198DF80300E7B7C1 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
@@ -86,9 +89,6 @@
 		6C504366198DEF7100DF881F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		6C504367198DEF7100DF881F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		6C504368198DEF7100DF881F /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
-		6C5BEDDF198E0B3800368A60 /* categoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryTableViewCell.h; sourceTree = "<group>"; };
-		6C5BEDE0198E0B3800368A60 /* categoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryTableViewCell.m; sourceTree = "<group>"; };
-		6C5BEDE1198E0B3800368A60 /* categoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryTableViewCell.xib; sourceTree = "<group>"; };
 		6C5BEDE4198E1F8000368A60 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		6C5BEDE6198E202B00368A60 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		6C5BEDE8198E21AB00368A60 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -256,9 +256,9 @@
 				6C0ABFE1198DF80300E7B7C1 /* MapViewController.h */,
 				6C0ABFE2198DF80300E7B7C1 /* MapViewController.m */,
 				6C0ABFE3198DF80300E7B7C1 /* MapViewController.xib */,
-				6C5BEDDF198E0B3800368A60 /* categoryTableViewCell.h */,
-				6C5BEDE0198E0B3800368A60 /* categoryTableViewCell.m */,
-				6C5BEDE1198E0B3800368A60 /* categoryTableViewCell.xib */,
+				1BBE3A5E198E761300935FF3 /* BeaconCellTableViewCell.h */,
+				1BBE3A5F198E761300935FF3 /* BeaconCellTableViewCell.m */,
+				1BBE3A60198E761300935FF3 /* BeaconCellTableViewCell.xib */,
 			);
 			name = viewsController;
 			sourceTree = "<group>";
@@ -341,12 +341,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C50433C198DED3700DF881F /* InfoPlist.strings in Resources */,
-				6C5BEDE3198E0B3800368A60 /* categoryTableViewCell.xib in Resources */,
 				6C504344198DED3700DF881F /* Images.xcassets in Resources */,
 				6C50436A198DEF7100DF881F /* SearchViewController.xib in Resources */,
 				6C0ABFE5198DF80300E7B7C1 /* MapViewController.xib in Resources */,
 				6C504365198DEEA400DF881F /* LoginViewController.xib in Resources */,
 				6C5BEDE7198E202B00368A60 /* GoogleMaps.bundle in Resources */,
+				1BBE3A62198E761300935FF3 /* BeaconCellTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,9 +401,9 @@
 				6C504342198DED3700DF881F /* AppDelegate.m in Sources */,
 				6C50433E198DED3700DF881F /* main.m in Sources */,
 				89165FD8198E5BE800693F58 /* NavViewController.m in Sources */,
+				1BBE3A61198E761300935FF3 /* BeaconCellTableViewCell.m in Sources */,
 				1B78F130198E1C940077AE84 /* BeaconGuideAPI.m in Sources */,
 				6C0ABFE4198DF80300E7B7C1 /* MapViewController.m in Sources */,
-				6C5BEDE2198E0B3800368A60 /* categoryTableViewCell.m in Sources */,
 				6C504369198DEF7100DF881F /* SearchViewController.m in Sources */,
 				6C504364198DEEA400DF881F /* LoginViewController.m in Sources */,
 			);

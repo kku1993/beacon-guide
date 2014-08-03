@@ -1,14 +1,14 @@
 //
-//  categoryTableViewCell.m
+//  BeaconCellTableViewCell.m
 //  BeaconGuide
 //
-//  Created by Kaili An on 8/2/14.
+//  Created by Kevin Ku on 8/3/14.
 //  Copyright (c) 2014 Beacon_Guide. All rights reserved.
 //
 
-#import "categoryTableViewCell.h"
+#import "BeaconCellTableViewCell.h"
 
-@implementation categoryTableViewCell
+@implementation BeaconCellTableViewCell
 
 - (void)awakeFromNib
 {
