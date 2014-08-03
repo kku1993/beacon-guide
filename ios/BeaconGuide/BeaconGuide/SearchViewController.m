@@ -2,7 +2,7 @@
 //  SearchViewController.m
 //  BeaconGuide
 //
-//  Created by Kaili An on 8/2/14.
+//  Created by ; An on 8/2/14.
 //  Copyright (c) 2014 Beacon_Guide. All rights reserved.
 //
 
@@ -10,6 +10,8 @@
 
 @interface SearchViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *selectionTableView;
+@property (weak, nonatomic) IBOutlet UIScrollView *ScrollView;
+
 
 @end
 
@@ -29,8 +31,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.userInteractionEnabled = TRUE;
+    self.ScrollView.contentSize = self.selectionTableView.frame.size;
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     self.selectionTableView.tableHeaderView= searchBar;
+    UITableView *selectionView;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyBoard)];
+    [self.view addGestureRecognizer:tap];
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,10 +60,8 @@
     [self.view endEditing:YES];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+- (void) dismissKeyBoard
 {
-    [searchBar resignFirstResponder];
-    // Do the search...
+    [self.searchBar resignFirstResponder];
 }
-
 @end
