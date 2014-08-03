@@ -8,6 +8,7 @@
 
 #import "NavViewController.h"
 #import "SearchViewController.h"
+#import "THProgressView.h"
 
 @interface NavViewController ()
 
@@ -16,6 +17,7 @@
 @property (strong, nonatomic) NSString *startBeaconID;
 @property (strong, nonatomic) NSString *endBeaconID;
 @property (strong, nonatomic) UIProgressView *progressBar;
+@property (strong, nonatomic) THProgressView *progBar;
 @end
 
 @implementation NavViewController
@@ -54,13 +56,33 @@
     
     [self.view addSubview:self.displaySearchView];
     
-    self.progressBar = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
-    self.progressBar.center = self.view.center;
-    self.progressBar.progress = 10.0f/30.0f;
-    [self.view addSubview:self.progressBar];
+    
+    CGRect rect = CGRectMake(10, 180, 300, 44);
+    THProgressView *progressView = [[THProgressView alloc] initWithFrame:rect];
+    progressView.borderTintColor = [UIColor whiteColor];
+    progressView.progressTintColor = [UIColor whiteColor];
+    [progressView setProgress:0.5f animated:YES];
+    
+    
+    
+//    self.progressBar = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
+//    self.progressBar.progress = 0.0;
+//    [self performSelectorInBackground:@selector(progressUpdate) withObject:nil];
+//    [self.view addSubview:self.progressBar];
 
 }
 
+
+-(void)progressUpdate {
+    for(int i = 0; i<100; i++){
+        [self performSelectorOnMainThread:@selector(setProgress:) withObject:[NSNumber numberWithFloat:(1/(float)i)] waitUntilDone:YES];
+    }
+}
+
+- (void)setProgress:(NSNumber *)number
+{
+    [self.progressBar setProgress:number.floatValue animated:YES];
+}
 
 - (void)didReceiveMemoryWarning
 {

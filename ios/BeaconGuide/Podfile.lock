@@ -21,13 +21,16 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - EstimoteSDK (2.0.1)
+  - THProgressView (1.0)
 
 DEPENDENCIES:
   - AFNetworking
   - EstimoteSDK
+  - THProgressView (~> 1.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
   EstimoteSDK: b6d533947e1aaa421b6cbc3aec517f25d1c0c9ec
+  THProgressView: 083589a96d15ee94329a27cab1d1a79111722efa
 
 COCOAPODS: 0.33.1
