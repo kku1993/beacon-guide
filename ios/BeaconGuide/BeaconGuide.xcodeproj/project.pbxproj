@@ -25,6 +25,8 @@
 		6C504365198DEEA400DF881F /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C504363198DEEA400DF881F /* LoginViewController.xib */; };
 		6C504369198DEF7100DF881F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C504367198DEF7100DF881F /* SearchViewController.m */; };
 		6C50436A198DEF7100DF881F /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C504368198DEF7100DF881F /* SearchViewController.xib */; };
+		6C5BEDE2198E0B3800368A60 /* categoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5BEDE0198E0B3800368A60 /* categoryTableViewCell.m */; };
+		6C5BEDE3198E0B3800368A60 /* categoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C5BEDE1198E0B3800368A60 /* categoryTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,9 @@
 		6C504366198DEF7100DF881F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		6C504367198DEF7100DF881F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		6C504368198DEF7100DF881F /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		6C5BEDDF198E0B3800368A60 /* categoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryTableViewCell.h; sourceTree = "<group>"; };
+		6C5BEDE0198E0B3800368A60 /* categoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryTableViewCell.m; sourceTree = "<group>"; };
+		6C5BEDE1198E0B3800368A60 /* categoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +177,9 @@
 				6C0ABFE1198DF80300E7B7C1 /* MapViewController.h */,
 				6C0ABFE2198DF80300E7B7C1 /* MapViewController.m */,
 				6C0ABFE3198DF80300E7B7C1 /* MapViewController.xib */,
+				6C5BEDDF198E0B3800368A60 /* categoryTableViewCell.h */,
+				6C5BEDE0198E0B3800368A60 /* categoryTableViewCell.m */,
+				6C5BEDE1198E0B3800368A60 /* categoryTableViewCell.xib */,
 			);
 			name = viewsController;
 			sourceTree = "<group>";
@@ -252,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C50433C198DED3700DF881F /* InfoPlist.strings in Resources */,
+				6C5BEDE3198E0B3800368A60 /* categoryTableViewCell.xib in Resources */,
 				6C504344198DED3700DF881F /* Images.xcassets in Resources */,
 				6C50436A198DEF7100DF881F /* SearchViewController.xib in Resources */,
 				6C0ABFE5198DF80300E7B7C1 /* MapViewController.xib in Resources */,
@@ -277,6 +286,7 @@
 				6C504342198DED3700DF881F /* AppDelegate.m in Sources */,
 				6C50433E198DED3700DF881F /* main.m in Sources */,
 				6C0ABFE4198DF80300E7B7C1 /* MapViewController.m in Sources */,
+				6C5BEDE2198E0B3800368A60 /* categoryTableViewCell.m in Sources */,
 				6C504369198DEF7100DF881F /* SearchViewController.m in Sources */,
 				6C504364198DEEA400DF881F /* LoginViewController.m in Sources */,
 			);
