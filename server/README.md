@@ -55,3 +55,24 @@ Beacon Guide
   ]
 }
 ```
+
+## POST /api/getPath
+- Request
+
+```
+{
+  startBeaconID: "...",
+  endBeaconID: "...",
+  buildingID: "..."
+}
+```
+
+- Response 
+
+```
+[
+  "1",
+  "2",
+  "3"
+]
+```

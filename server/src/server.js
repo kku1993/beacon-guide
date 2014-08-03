@@ -2,7 +2,8 @@ var express = require('express'),
     logger = require('morgan'),
     bodyParser = require('body-parser');
 
-var DB = require('./db');
+var DB = require('./db'),
+    pathFinder = require('./path_finder');
 
 function isValidBeacon(data) {
   return (data.UUID && data.majorNumber && data.minorNumber);
@@ -31,22 +32,27 @@ function startServer() {
       res.json(building);
     });
   });
-  app.post('/api/navigate', function(req, res) {
-    if(!req.body.startBeacon || !req.body.endBeacon) {
+  app.post('/api/getPath', function(req, res) {
+    if(!req.body.startBeaconID || !req.body.endBeaconID || 
+      !req.body.buildingID) {
       res.status(400).end();
       return;
     }
-
-    var start = req.body.startBeacon;
-    var end = req.body.endBeacon;
-
-    if(!isValidBeacon(start) || !isValidBeacon(end)) {
-      res.status(400).end();
-      return;
-    }
-
-    //var path = pathPlanner(start, end);
-    res.status(200).end();
+    
+    db.getBuildingByID(req.body.buildingID, function(err, building) {
+      if(err) {
+        res.status(500).end();
+        return;
+      }
+      var path = pathFinder.findPath(building, req.body.startBeaconID, 
+        req.body.endBeaconID, function(err, path) {
+        if(err) {
+          res.status(500).end();
+          return;
+        }
+        res.json(path);
+      });
+    });
   });
   app.post('/api', function(req, res) {
     res.write('Beacon Guide API v0.1');

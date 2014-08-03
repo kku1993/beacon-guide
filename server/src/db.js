@@ -36,3 +36,17 @@ DB.prototype.getBeaconBuilding = function(beaconData, callback) {
 
   callback(null, building);
 };
+
+DB.prototype.getBeaconByBeaconData = function(beaconData, callback) {
+  var beacon = _.filter(mockBeacons, function(b) {
+    return b.UUID === beaconData.UUID && 
+      b.majorNumber === beaconData.majorNumber &&
+      b.minorNumber === beaconData.minorNumber;
+  }).pop();
+
+  callback(null, beacon);
+};
+
+DB.prototype.getBuildingByID = function(buildingID, callback) {
+  callback(null, mockBuilding);
+};
