@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSDictionary *building;
 @property (strong, nonatomic) NSString *startBeaconID;
 @property (strong, nonatomic) NSString *endBeaconID;
-
+@property (strong, nonatomic) UIProgressView *progressBar;
 @end
 
 @implementation NavViewController
@@ -53,7 +53,14 @@
     [self.displaySearchView addTarget:self action:@selector(performDisplaySearchViewController:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.displaySearchView];
+    
+    self.progressBar = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
+    self.progressBar.center = self.view.center;
+    self.progressBar.progress = 10.0f/30.0f;
+    [self.view addSubview:self.progressBar];
+
 }
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -15,7 +15,7 @@ UIPickerViewDelegate,
 UIPickerViewDataSource>
 
 @property (strong, nonatomic) NSDictionary *building;
-@property (strong, nonatomic) UIProgressView *progressView;
+
 
 @end
 
@@ -99,12 +99,9 @@ UIPickerViewDataSource>
                                views:views]];
     
     
+    
     //progress bar
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-    self.progressView.center = self.view.center;
-    self.progressView.progress = 10.0f/30.0f;
-    [self.view addSubview:self.progressView];
-}
+    }
 
 
 - (void)didChangeActiveBuilding:(GMSIndoorBuilding *)building {
