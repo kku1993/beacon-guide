@@ -10,6 +10,7 @@
 #import "SearchViewController.h"
 #import "THProgressView.h"
 
+#define DEFAULT_BLUE [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]
 static const CGSize progressViewSize = { 200.0f, 30.0f };
 
 @interface NavViewController ()
@@ -111,7 +112,22 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
     [topBar addSubview:topProgressView];
     [self.view addSubview:topBar];
     
-    self.progressViews = @[ topProgressView];
+    
+    
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMidY(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetMidY(self.view.bounds))];
+    bottomView.backgroundColor = [UIColor whiteColor];
+    
+    THProgressView *bottomProgressView = [[THProgressView alloc] initWithFrame:CGRectMake(CGRectGetMidX(bottomView.frame) - progressViewSize.width / 2.0f,
+                                                                                          CGRectGetMidY(bottomProgressView.frame) - progressViewSize.height / 2.0f,
+                                                                                          progressViewSize.width,
+                                                                                          progressViewSize.height)];
+    bottomProgressView.borderTintColor = DEFAULT_BLUE;
+    bottomProgressView.progressTintColor = DEFAULT_BLUE;
+    [bottomView addSubview:bottomProgressView];
+    [self.view addSubview:bottomView];
+
+    
+    self.progressViews = @[ topProgressView, bottomProgressView];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];}
 
