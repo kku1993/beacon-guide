@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "SearchViewController.h"
 #import "GoogleMaps/GoogleMaps.h"
+#import "MapViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

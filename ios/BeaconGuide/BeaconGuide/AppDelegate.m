@@ -18,7 +18,9 @@
     // Override point for customization after application launch.
     
     //LoginViewController *vc = [[LoginViewController alloc]init];
-    SearchViewController *vc = [[SearchViewController alloc]init];
+    //SearchViewController *vc = [[SearchViewController alloc]init];
+    MapViewController *vc = [[MapViewController alloc]init];
+    
     self.window.rootViewController = vc;
     
     self.window.backgroundColor = [UIColor whiteColor];
