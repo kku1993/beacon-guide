@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+#import "BeaconGuideAPI.h"
+#import "ESTBeaconManager.h"
+#import "ESTBeaconRegion.h"
+
+@interface SearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ESTBeaconManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *beaconsTableView;
 

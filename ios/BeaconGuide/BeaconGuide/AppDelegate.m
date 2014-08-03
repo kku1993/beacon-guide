@@ -23,17 +23,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [GMSServices provideAPIKey:@"AIzaSyD6h_yAMDZ5EN_obflcv-rMroYqbtbfn_g"];
     
-    // Override point for customization after application launch.
-    
-    //LoginViewController *vc = [[LoginViewController alloc]init];
-    NavViewController *vc = [[SearchViewController alloc]init];
-    //MapViewController *vc = [[MapViewController alloc]init];
-    self.navigationController = [[UINavigationController alloc]initWithRootViewController:vc];
-    
-    self.window = [[UIWindow alloc]
-                   initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = self.navigationController;
-    //self.window.rootViewController = vc;
+    SearchViewController *vc = [[SearchViewController alloc]init];
+    UINavigationController *nvc = [[UINavigationController alloc]initWithRootViewController:vc];
+    self.window.rootViewController = nvc;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

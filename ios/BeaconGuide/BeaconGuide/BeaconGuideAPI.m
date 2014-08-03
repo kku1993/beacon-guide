@@ -35,18 +35,14 @@
 }
 
 -(void)httpPost :(NSString *)url :(NSDictionary *)params :(RequestCallback)successCB :(ErrorCallback)failureCB {
-    [self.operationManager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+    [self.operationManager POST:url parameters:params success:successCB failure:failureCB];
 }
 
--(void)getBeaconBuilding :(NSUUID *)UUID :(NSNumber *)majorNumber :(NSNumber *)minorNumber :(RequestCallback)successCB :(ErrorCallback)failureCB {
+-(void)getBeaconBuilding :(NSUUID *)UUID :(NSUInteger)majorNumber :(NSUInteger)minorNumber :(RequestCallback)successCB :(ErrorCallback)failureCB {
     NSMutableDictionary *beaconData = [[NSMutableDictionary alloc] init];
     [beaconData setObject:[UUID UUIDString] forKey:@"UUID"];
-    [beaconData setObject:majorNumber forKey:@"majorNumber"];
-    [beaconData setObject:minorNumber forKey:@"minorNumber"];
+    [beaconData setValue:[NSNumber numberWithInteger:majorNumber] forKey:@"majorNumber"];
+    [beaconData setValue:[NSNumber numberWithInteger:minorNumber] forKey:@"minorNumber"];
    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:beaconData, @"beacon", nil];
     if(successCB && failureCB) {

@@ -14,7 +14,9 @@
 
 @interface SearchViewController ()
 
-@property (strong, nonatomic) NSArray *beacons;
+@property (strong, nonatomic) NSDictionary *building;
+@property (strong, nonatomic) ESTBeaconManager *beaconManager;
+@property (strong, nonatomic) ESTBeaconRegion *scanRegion;
 
 @end
 
@@ -32,21 +34,46 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                    style:UIBarButtonItemStyleDone target:nil action:nil];
-    self.navigationItem.leftBarButtonItem = leftButton;
-
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"
-                                                                   style:UIBarButtonItemStyleDone target:nil action:nil];
     
-    self.navigationItem.rightBarButtonItem = rightButton;
-    self.title = @"Beacons in the Building";
- 
+    [self initNavBar];
+    
     self.beaconsTableView.delegate = self;
     self.beaconsTableView.dataSource = self;
     
-    self.beacons = [[NSArray alloc] initWithObjects:@"1", @"2", @"3", nil];
+    self.building = nil;
+    
+    // estimote
+    self.beaconManager = [[ESTBeaconManager alloc] init];
+    self.beaconManager.delegate = self;
+    
+    // scan for all estimote beacons
+    self.scanRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:ESTIMOTE_PROXIMITY_UUID identifier:@"building-scan"];
+    [self.beaconManager startRangingBeaconsInRegion:self.scanRegion];
+    
+    // DEBUG
+    BeaconGuideAPI *api = [BeaconGuideAPI instance];
+    [api getBeaconBuilding:ESTIMOTE_PROXIMITY_UUID :1 :1 :^(AFHTTPRequestOperation *operation, id data) {
+        self.building = data;
+        [self.beaconsTableView reloadData];
+    } :^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+        [self.beaconManager startMonitoringForRegion:self.scanRegion];
+    }];
+}
+
+- (void)initNavBar {
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                                                   style:UIBarButtonItemStyleDone target:nil action:nil];
+    [self.navigationItem setLeftBarButtonItem:leftButton];
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"
+                                                                    style:UIBarButtonItemStyleDone target:nil action:nil];
+    
+    [self.navigationItem setRightBarButtonItem:rightButton];
+    
+    self.navigationItem.title = @"Beacons in the Building";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor] }];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:85/255.0 green:172/255.0 blue:238/255.0 alpha:1];
 }
 
 - (void)goBack {
@@ -81,7 +108,8 @@
         cell = [nib objectAtIndex:0];
     }
     
-    cell.beaconDescriptionLabel.text = self.beacons[indexPath.row];
+    cell.beaconUUIDLabel.text = self.building[@"beaconDetails"][indexPath.row][@"UUID"];
+    cell.beaconDescriptionLabel.text = self.building[@"beaconDetails"][indexPath.row][@"description"];
     return cell;
 }
 
@@ -90,7 +118,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.beacons.count;
+    return [self.building[@"beaconDetails"] count];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
@@ -99,6 +127,28 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 120;
+}
+
+// beacon
+-(void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region {
+    if([beacons count] > 0) {
+        [self.beaconManager stopMonitoringForRegion:self.scanRegion];
+        
+        ESTBeacon* closestBeacon = [beacons objectAtIndex:0];
+        NSUUID *UUID = closestBeacon.proximityUUID;
+        NSUInteger majorNumber = [closestBeacon.major unsignedIntegerValue];
+        NSUInteger minorNumber = [closestBeacon.minor unsignedIntegerValue];
+        
+        // get building info
+        BeaconGuideAPI *api = [BeaconGuideAPI instance];
+        [api getBeaconBuilding:UUID :majorNumber :minorNumber :^(AFHTTPRequestOperation *operation, id data) {
+            self.building = data;
+            [self.beaconsTableView reloadData];
+        } :^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@", error);
+            [self.beaconManager startMonitoringForRegion:self.scanRegion];
+        }];
+    }
 }
 
 @end
