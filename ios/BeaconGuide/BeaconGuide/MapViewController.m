@@ -77,11 +77,12 @@ UIPickerViewDataSource>
     mapView_.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:mapView_];
     
+    NSArray *beaconData = self.building[@"beaconDetails"];
     
     _currentLocationMarker = [[GMSMarker alloc]init];
     _currentLocationMarker.title = @"Starting point";
     _currentLocationMarker.snippet = @"Current Store is: Victoria Secret";
-    _currentLocationMarker.position = CLLocationCoordinate2DMake(CLLocationDegrees latitude, <#CLLocationDegrees longitude#>);
+    _currentLocationMarker.position = CLLocationCoordinate2DMake([beaconData[0][@"position"][@"lat"] doubleValue], [beaconData[0][@"position"][@"lng"] doubleValue]);
     _currentLocationMarker.map = mapView_;
     NSLog(@"Starting point location: %@", _currentLocationMarker);
     
@@ -90,14 +91,14 @@ UIPickerViewDataSource>
     _nextDestMarker = [[GMSMarker alloc]init];
     _nextDestMarker.title = @"first stopping point";
     _nextDestMarker.snippet = @"Current Store is: Nordstrom";
-    _nextDestMarker.position = CLLocationCoordinate2DMake(CLLocationDegrees latitude, <#CLLocationDegrees longitude#>);
+    _nextDestMarker.position = CLLocationCoordinate2DMake([beaconData[1][@"position"][@"lat"] doubleValue], [beaconData[1][@"position"][@"lng"] doubleValue]);
     _nextDestMarker.map = mapView_;
     NSLog(@"First stopping point location: %@", _nextDestMarker);
     
     _thirdMarker = [[GMSMarker alloc]init];
     _thirdMarker.title = @"last stopping point";
     _thirdMarker.snippet = @"Current Store is: Nordstrom";
-    _thirdMarker.position = CLLocationCoordinate2DMake(<#CLLocationDegrees latitude#>, <#CLLocationDegrees longitude#>);
+    _thirdMarker.position = CLLocationCoordinate2DMake([beaconData[2][@"position"][@"lat"] doubleValue], [beaconData[2][@"position"][@"lng"] doubleValue]);
     _thirdMarker.map = mapView_;
     NSLog(@"First stopping point location: %@", _thirdMarker);
     
@@ -218,7 +219,7 @@ UIPickerViewDataSource>
     
 }
 
-- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker:(GMSMarker *)marker{
+- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker{
     if(marker == _currentLocationMarker){
         return _contentView;
     }
