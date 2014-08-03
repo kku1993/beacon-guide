@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISplitViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *arrayOfSections;
 

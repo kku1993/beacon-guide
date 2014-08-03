@@ -8,6 +8,7 @@
 
 #import "SearchViewController.h"
 #import "categoryTableViewCell.h"
+#import "GoogleMaps/GoogleMaps.h"
 
 @interface SearchViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *selectionTableView;
@@ -32,10 +33,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.selectionTableView.delegate = self;
-   // self.selectionTableView.dataSource = self;
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                    style:UIBarButtonItemStyleDone target:nil action:nil];
+    self.navigationItem.rightBarButtonItem = rightButton;
     
-    self.ScrollView.contentSize = self.selectionTableView.frame.size;
+//    self.ScrollView.contentSize = self.selectionTableView.frame.size;
     
     //search bar as header
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
@@ -46,13 +48,16 @@
     [self.view addGestureRecognizer:tap];
     
     //set each table view photo
-    UINib *nib = [UINib nibWithNibName:@"categoryTableViewCell" bundle:nil];
-    [self.selectionTableView registerNib:nib forCellReuseIdentifier:@"categoryTableViewCell"];
+//    UINib *nib = [UINib nibWithNibName:@"categoryTableViewCell" bundle:nil];
+//    [self.selectionTableView registerNib:nib forCellReuseIdentifier:@"categoryTableViewCell"];
+    
+    self.title = NSLocalizedString(@"Beacon Guide", @"Beacon Guide");
     
    // self.selectionTableView.rowHeight = 320;
     self.selectionTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.selectionTableView.delegate = self;
+    // self.selectionTableView.dataSource = self;
 
-    
     
 }
 
