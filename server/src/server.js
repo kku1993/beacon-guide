@@ -5,10 +5,6 @@ var express = require('express'),
 var DB = require('./db'),
     pathFinder = require('./path_finder');
 
-function isValidBeacon(data) {
-  return (data.UUID && data.majorNumber && data.minorNumber);
-}
-
 function startServer() {
   var db = new DB();
 
@@ -18,11 +14,7 @@ function startServer() {
   app.use(logger('dev'));
   app.use(bodyParser.json());
   
-  app.post('/api/getBuilding', function(req, res) {
-    if(!isValidBeacon(req.body.beacon)) {
-      res.status(400).end();
-      return;
-    }
+  app.post('/api/getBeaconBuilding', function(req, res) {
     db.getBeaconBuilding(req.body.beacon, function(err, building) {
       if(err) {
         res.status(404).end();

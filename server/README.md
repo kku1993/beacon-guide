@@ -3,7 +3,7 @@ Beacon Guide
 
 # Beacon Guide API v0.1
 
-## POST /api/getBuilding
+## POST /api/getBeaconBuilding
 - Request
 
 ```
