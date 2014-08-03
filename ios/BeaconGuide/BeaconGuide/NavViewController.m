@@ -8,22 +8,15 @@
 
 #import "NavViewController.h"
 #import "SearchViewController.h"
-#import "THProgressView.h"
-
-#define DEFAULT_BLUE [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]
-static const CGSize progressViewSize = { 200.0f, 30.0f };
 
 @interface NavViewController ()
 
-@property (nonatomic,strong) UIButton *displaySearchView;
 @property (strong, nonatomic) NSDictionary *building;
 @property (strong, nonatomic) NSString *startBeaconID;
 @property (strong, nonatomic) NSString *endBeaconID;
 
-//@property (strong, nonatomic) UIProgressView *progressBar;
-@property (strong, nonatomic) THProgressView *progBar;
-@property (nonatomic, strong) NSArray *progressViews;
-@property (nonatomic, strong) NSTimer *timer;
+// progress view
+@property (strong, nonatomic) MRCircularProgressView *progressView;
 @property (nonatomic) CGFloat progress;
 
 // path
@@ -85,69 +78,31 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
     self.scanRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:ESTIMOTE_PROXIMITY_UUID identifier:@"building-scan"];
     [self.beaconManager startRangingBeaconsInRegion:self.scanRegion];
     
-    [self.view addSubview:self.displaySearchView];
-    
-    
-//    CGRect rect = CGRectMake(10, 180, 300, 44);
-//    THProgressView *progressView = [[THProgressView alloc] initWithFrame:rect];
-//    progressView.borderTintColor = [UIColor whiteColor];
-//    progressView.progressTintColor = [UIColor whiteColor];
-//    [progressView setProgress:0.5f animated:YES];
-    
-    
-    
-//    self.progressBar = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
-//    self.progressBar.progress = 0.0;
-//    [self performSelectorInBackground:@selector(progressUpdate) withObject:nil];
-//    [self.view addSubview:self.progressBar];
-    
-    
+    // set up progress view
     UIView *topBar =[[UIView alloc]initWithFrame:CGRectMake(0,0,CGRectGetWidth(self.view.bounds), CGRectGetMidY(self.view.bounds))];
-    THProgressView *topProgressView = [[THProgressView alloc] initWithFrame:CGRectMake(CGRectGetMidX(topBar.frame) - progressViewSize.width / 2.0f,
-                                                                                       CGRectGetMidY(topBar.frame) - progressViewSize.height / 2.0f,
-                                                                                       progressViewSize.width,
-                                                                                       progressViewSize.height)];
-    topProgressView.borderTintColor = [UIColor whiteColor];
-    topProgressView.progressTintColor = [UIColor whiteColor];
-    [topBar addSubview:topProgressView];
-    [self.view addSubview:topBar];
-    
-    
-    
+    self.progressView = [[MRCircularProgressView alloc] initWithFrame:CGRectMake(CGRectGetMidX(topBar.frame) - 100 / 2.0f,
+                                                                                       CGRectGetMidY(topBar.frame) - 100 / 2.0f,
+                                                                                       100,
+                                                                                       100)];
+    [topBar addSubview:self.progressView];
+    [NSTimer scheduledTimerWithTimeInterval:0.1
+                                     target:self
+                                   selector:@selector(progressUpdate)
+                                   userInfo:nil
+                                    repeats:YES];
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMidY(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetMidY(self.view.bounds))];
-    bottomView.backgroundColor = [UIColor whiteColor];
+    self.progress = 0;
     
-    THProgressView *bottomProgressView = [[THProgressView alloc] initWithFrame:CGRectMake(CGRectGetMidX(bottomView.frame) - progressViewSize.width / 2.0f,CGRectGetMidY(bottomProgressView.frame) - progressViewSize.height / 2.0f,progressViewSize.width,progressViewSize.height)];
-    bottomProgressView.borderTintColor = DEFAULT_BLUE;
-    bottomProgressView.progressTintColor = DEFAULT_BLUE;
-    [bottomView addSubview:bottomProgressView];
+    [self.view addSubview:topBar];
     [self.view addSubview:bottomView];
-
-    
-    self.progressViews = @[ topProgressView, bottomProgressView];
-    
-//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
-
 }
-
 
 -(void)progressUpdate {
-    for(int i = 0; i<100; i++){
-        [self performSelectorOnMainThread:@selector(setProgress:) withObject:[NSNumber numberWithFloat:(1/(float)i)] waitUntilDone:YES];
+    self.progress += 0.1;
+    if(self.progress > 1.0f) {
+        return;
     }
-}
-
-- (void)setProgress:(NSNumber *)number
-{
-    self.progress += 0.20f;
-    if (self.progress > 1.0f) {
-        self.progress = 0;
-    }
-    
-    [self.progressViews enumerateObjectsUsingBlock:^(THProgressView *progressView, NSUInteger idx, BOOL *stop) {
-        [progressView setProgress:self.progress animated:YES];
-    }];
-
+    [self.progressView setProgress:self.progress animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

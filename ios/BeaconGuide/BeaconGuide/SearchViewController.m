@@ -73,6 +73,9 @@
 }
 
 - (void)initNavBar {
+    UIBarButtonItem *mapButton = [[UIBarButtonItem alloc] initWithTitle:@"Map" style:UIBarButtonItemStyleDone target:self action:@selector(showMap)];
+    self.navigationItem.rightBarButtonItem = mapButton;
+    
     self.navigationItem.title = @"Beacons in the Building";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor] }];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:85/255.0 green:172/255.0 blue:238/255.0 alpha:1];
@@ -88,6 +91,12 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+- (void) showMap {
+    MapViewController *map = [[MapViewController alloc] initWithBuildingData:self.building];
+    [self.navigationController pushViewController:map animated:YES];
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
