@@ -1,7 +1,7 @@
 {
   "1": {
     "beaconID": "1",
-    "UUID": "123E4567-E89B-12D3-A456-426655440000",
+    "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
     "majorNumber": 1,
     "minorNumber": 1,
     "description": "Art 1",
@@ -13,7 +13,7 @@
   },
   "2": {
     "beaconID": "2",
-    "UUID": "123",
+    "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
     "majorNumber": 2,
     "minorNumber": 2,
     "description": "Art 2",
@@ -25,7 +25,7 @@
   },
   "3": {
     "beaconID": "3",
-    "UUID": "123",
+    "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
     "majorNumber": 3,
     "minorNumber": 3,
     "description": "Art 3",
