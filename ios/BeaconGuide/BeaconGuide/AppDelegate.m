@@ -7,8 +7,15 @@
 //
 
 #import "AppDelegate.h"
+#import "SearchViewController.h"
+
+@interface AppDelegate ()
+@property (nonatomic, strong) UINavigationController *navigationController;
+
+@end
 
 @implementation AppDelegate
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -20,7 +27,12 @@
     //LoginViewController *vc = [[LoginViewController alloc]init];
     SearchViewController *vc = [[SearchViewController alloc]init];
     //MapViewController *vc = [[MapViewController alloc]init];
-    self.window.rootViewController = vc;
+    self.navigationController = [[UINavigationController alloc]initWithRootViewController:vc];
+    
+    self.window = [[UIWindow alloc]
+                   initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = self.navigationController;
+    //self.window.rootViewController = vc;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

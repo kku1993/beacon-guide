@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *selectionTableView;
 @property (weak, nonatomic) IBOutlet UIScrollView *ScrollView;
 @property (strong, nonatomic) NSArray *locations;
-
+@property (nonatomic, strong) UINavigationController *navigationController;
 
 @end
 
