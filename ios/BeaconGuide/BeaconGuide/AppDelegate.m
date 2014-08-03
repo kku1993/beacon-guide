@@ -13,6 +13,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [GMSServices provideAPIKey:@"AIzaSyD6h_yAMDZ5EN_obflcv-rMroYqbtbfn_g"];
+    
     // Override point for customization after application launch.
     
     //LoginViewController *vc = [[LoginViewController alloc]init];

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LoginViewController.h"
 #import "SearchViewController.h"
+#import "GoogleMaps/GoogleMaps.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
