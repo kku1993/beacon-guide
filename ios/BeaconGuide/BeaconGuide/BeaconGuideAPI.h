@@ -18,7 +18,7 @@ typedef void(^ErrorCallback)(AFHTTPRequestOperation *operation, NSError * error)
 
 +(BeaconGuideAPI *)instance;
 
--(void)getBeaconBuilding :(NSUUID *)UUID :(NSUInteger)majorNumber :(NSUInteger)minorNumber :(RequestCallback)successCB :(ErrorCallback)failureCB;
+-(void)getBeaconBuilding :(NSUUID *)UUID :(NSNumber *)majorNumber :(NSNumber *)minorNumber :(RequestCallback)successCB :(ErrorCallback)failureCB;
 
 - (void)getPath :(NSString *)startBeaconID :(NSString *)endBeaconID :(NSString *)buildingID :(RequestCallback)successCB :(RequestCallback)failureCB;
 

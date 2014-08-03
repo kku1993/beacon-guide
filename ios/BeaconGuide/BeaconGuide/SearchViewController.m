@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSDictionary *building;
 @property (strong, nonatomic) ESTBeaconManager *beaconManager;
 @property (strong, nonatomic) ESTBeaconRegion *scanRegion;
+@property (strong, nonatomic) NSDictionary *currentBeaconData;
 
 @end
 
@@ -52,8 +53,19 @@
     
     // DEBUG
     BeaconGuideAPI *api = [BeaconGuideAPI instance];
-    [api getBeaconBuilding:ESTIMOTE_PROXIMITY_UUID :1 :1 :^(AFHTTPRequestOperation *operation, id data) {
+    [api getBeaconBuilding:ESTIMOTE_PROXIMITY_UUID :[[NSNumber alloc] initWithInt: 1] :[[NSNumber alloc] initWithInt: 1] :^(AFHTTPRequestOperation *operation, id data) {
         self.building = data;
+        
+        NSArray *beacons = self.building[@"beaconDetails"];
+        for(int i = 0; i < [beacons count]; i++) {
+            NSDictionary *b = beacons[i];
+            if([b[@"majorNumber"] intValue] == 1 && [b[@"minorNumber"] intValue] == 1) {
+                NSLog(@"%@", b);
+                self.currentBeaconData = b;
+                break;
+            }
+        }
+        
         [self.beaconsTableView reloadData];
     } :^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);
@@ -62,28 +74,9 @@
 }
 
 - (void)initNavBar {
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                   style:UIBarButtonItemStyleDone target:nil action:nil];
-    [self.navigationItem setLeftBarButtonItem:leftButton];
-    
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"
-                                                                    style:UIBarButtonItemStyleDone target:nil action:nil];
-    
-    [self.navigationItem setRightBarButtonItem:rightButton];
-    
     self.navigationItem.title = @"Beacons in the Building";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor] }];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:85/255.0 green:172/255.0 blue:238/255.0 alpha:1];
-}
-
-- (void)goBack {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)goNext {
-    MapViewController *mapViewController = [[MapViewController alloc]initWithNibName:nil bundle:NULL];
-    [self.navigationController pushViewController:mapViewController animated:YES];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,7 +89,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self performSelector:@selector(goBack) withObject:nil afterDelay:5.0f];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -108,25 +100,61 @@
         cell = [nib objectAtIndex:0];
     }
     
-    cell.beaconUUIDLabel.text = self.building[@"beaconDetails"][indexPath.row][@"UUID"];
+    if(indexPath.section == 0) {
+        //current beacon
+        cell.beaconUUIDLabel.text = [[NSString alloc] initWithFormat:@"%@-%@", self.currentBeaconData[@"majorNumber"], self.self.currentBeaconData[@"minorNumber"]];
+        cell.beaconDescriptionLabel.text = @"My Current Location";
+        return cell;
+    }
+    
+    //TODO: filter out the current beacon
+    // all beacons
+    NSDictionary *b = self.building[@"beaconDetails"][indexPath.row];
+    cell.beaconUUIDLabel.text = [[NSString alloc] initWithFormat:@"%@-%@", b[@"majorNumber"], b[@"minorNumber"]];
     cell.beaconDescriptionLabel.text = self.building[@"beaconDetails"][indexPath.row][@"description"];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // launch navigation to the selected beacon
+    if(indexPath.section != 0) {
+        NavViewController *nav = [[NavViewController alloc] initWithBuildingData:self.building startBeaconID:self.currentBeaconData[@"beaconID"] endBeaconID:self.building[@"beaconDeatail"][indexPath.row][@"beaconID"]];
+        [self.navigationController pushViewController:nav animated:YES];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(section == 0) {
+        return 1;
+    }
     return [self.building[@"beaconDetails"] count];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 120;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionName;
+    switch (section) {
+        case 0:
+            sectionName = @"Current Location";
+            break;
+        case 1:
+            sectionName = @"Other Beacons in the Building";
+            break;
+        default:
+            sectionName = @"";
+            break;
+    }
+    return sectionName;
 }
 
 // beacon
@@ -136,13 +164,23 @@
         
         ESTBeacon* closestBeacon = [beacons objectAtIndex:0];
         NSUUID *UUID = closestBeacon.proximityUUID;
-        NSUInteger majorNumber = [closestBeacon.major unsignedIntegerValue];
-        NSUInteger minorNumber = [closestBeacon.minor unsignedIntegerValue];
+        NSNumber *majorNumber = closestBeacon.major;
+        NSNumber *minorNumber = closestBeacon.minor;
         
         // get building info
         BeaconGuideAPI *api = [BeaconGuideAPI instance];
         [api getBeaconBuilding:UUID :majorNumber :minorNumber :^(AFHTTPRequestOperation *operation, id data) {
             self.building = data;
+            
+            NSArray *beacons = self.building[@"beaconDetails"];
+            for(int i = 0; i < [beacons count]; i++) {
+                NSDictionary *b = beacons[i];
+                if(b[@"UUID"] == closestBeacon.proximityUUID && b[@"majorNumber"] == closestBeacon.major && b[@"minorNumber"] == closestBeacon.minor) {
+                    self.currentBeaconData = b;
+                    break;
+                }
+            }
+            
             [self.beaconsTableView reloadData];
         } :^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@", error);

@@ -16,27 +16,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="uAj-yS-M6W">
-                    <rect key="frame" x="0.0" y="49" width="320" height="519"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIq-6m-6XU">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <items>
-                        <navigationItem title="Title" id="LzS-vD-TDb"/>
-                    </items>
-                </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="uAj-yS-M6W" secondAttribute="trailing" id="4Pg-Dm-3Io"/>
-                <constraint firstItem="uAj-yS-M6W" firstAttribute="top" secondItem="vIq-6m-6XU" secondAttribute="bottom" constant="5" id="5xR-37-vbw"/>
-                <constraint firstAttribute="trailing" secondItem="vIq-6m-6XU" secondAttribute="trailing" id="612-7T-Kzr"/>
-                <constraint firstItem="vIq-6m-6XU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ENB-KJ-9Yw"/>
-                <constraint firstAttribute="bottom" secondItem="uAj-yS-M6W" secondAttribute="bottom" id="Xpe-Vq-ien"/>
-                <constraint firstItem="vIq-6m-6XU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gz9-Dx-63f"/>
-                <constraint firstItem="uAj-yS-M6W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sOi-u1-qx2"/>
+                <constraint firstItem="uAj-yS-M6W" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xzc-5T-Ubw"/>
+                <constraint firstAttribute="bottom" secondItem="uAj-yS-M6W" secondAttribute="bottom" id="Y3t-pU-mxJ"/>
+                <constraint firstAttribute="trailing" secondItem="uAj-yS-M6W" secondAttribute="trailing" id="od1-bR-QDu"/>
+                <constraint firstItem="uAj-yS-M6W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pDG-UV-Efp"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

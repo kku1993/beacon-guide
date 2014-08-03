@@ -11,6 +11,7 @@
 #import "BeaconGuideAPI.h"
 #import "ESTBeaconManager.h"
 #import "ESTBeaconRegion.h"
+#import "ESTBeacon.h"
 
 @interface SearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ESTBeaconManagerDelegate>
 

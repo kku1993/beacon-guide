@@ -38,11 +38,11 @@
     [self.operationManager POST:url parameters:params success:successCB failure:failureCB];
 }
 
--(void)getBeaconBuilding :(NSUUID *)UUID :(NSUInteger)majorNumber :(NSUInteger)minorNumber :(RequestCallback)successCB :(ErrorCallback)failureCB {
+-(void)getBeaconBuilding :(NSUUID *)UUID :(NSNumber *)majorNumber :(NSNumber *)minorNumber :(RequestCallback)successCB :(ErrorCallback)failureCB {
     NSMutableDictionary *beaconData = [[NSMutableDictionary alloc] init];
     [beaconData setObject:[UUID UUIDString] forKey:@"UUID"];
-    [beaconData setValue:[NSNumber numberWithInteger:majorNumber] forKey:@"majorNumber"];
-    [beaconData setValue:[NSNumber numberWithInteger:minorNumber] forKey:@"minorNumber"];
+    [beaconData setValue:majorNumber forKey:@"majorNumber"];
+    [beaconData setValue:minorNumber forKey:@"minorNumber"];
    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:beaconData, @"beacon", nil];
     if(successCB && failureCB) {
