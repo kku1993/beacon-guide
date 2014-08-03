@@ -129,7 +129,9 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
     
     self.progressViews = @[ topProgressView, bottomProgressView];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];}
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+
+}
 
 
 -(void)progressUpdate {
