@@ -18,8 +18,19 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
 @property (strong, nonatomic) NSDictionary *building;
 @property (strong, nonatomic) NSString *startBeaconID;
 @property (strong, nonatomic) NSString *endBeaconID;
+
 @property (strong, nonatomic) UIProgressView *progressBar;
 @property (strong, nonatomic) THProgressView *progBar;
+
+// path
+@property (strong, nonatomic) NSArray *path;
+@property (nonatomic) int currentBeaconNum;
+@property (strong, nonatomic) NSDictionary *waypointBeaconData;
+
+
+// estimote
+@property (strong, nonatomic) ESTBeaconManager *beaconManager;
+@property (strong, nonatomic) ESTBeaconRegion *scanRegion;
 @end
 
 @implementation NavViewController
@@ -46,15 +57,27 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.title = @"Beacon Guide";
-    self.displaySearchView = [UIButton buttonWithType:UIButtonTypeSystem];
     
-    [self.displaySearchView setTitle:@"Search indoor category" forState:UIControlStateNormal];
-    [self.displaySearchView sizeToFit];
-    self.displaySearchView.center = self.view.center;
+    // set up path
+    self.currentBeaconNum = 0;
+    BeaconGuideAPI *api = [BeaconGuideAPI instance];
+    [api getPath:self.startBeaconID :self.endBeaconID :self.building[@"buildingID"] :^(AFHTTPRequestOperation *operation, id data) {
+        self.path = data;
+        self.currentBeaconNum = 0;
+        if([self.path count]) {
+            self.waypointBeaconData = [self.building[@"beaconDetails"] objectAtIndex:[self.path[0] intValue]];
+        }
+    } :^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+    }];
     
-    [self.displaySearchView addTarget:self action:@selector(performDisplaySearchViewController:) forControlEvents:UIControlEventTouchUpInside];
+    // estimote
+    self.beaconManager = [[ESTBeaconManager alloc] init];
+    self.beaconManager.delegate = self;
+
+    // scan for all estimote beacons
+    self.scanRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:ESTIMOTE_PROXIMITY_UUID identifier:@"building-scan"];
+    [self.beaconManager startRangingBeaconsInRegion:self.scanRegion];
     
     [self.view addSubview:self.displaySearchView];
     
@@ -102,20 +125,32 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+// beacon
+-(void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region {
+    if([beacons count] > 0) {
+        [self.beaconManager stopMonitoringForRegion:self.scanRegion];
+        
+        ESTBeacon* closestBeacon = [beacons objectAtIndex:0];
+        //NSUUID *UUID = closestBeacon.proximityUUID;
+        NSNumber *majorNumber = closestBeacon.major;
+        NSNumber *minorNumber = closestBeacon.minor;
+        
+        
+        if([majorNumber intValue] == [self.waypointBeaconData[@"majorNumber"] intValue] && [minorNumber intValue] == [self.waypointBeaconData[@"minorNumber"] intValue]) {
+            self.currentBeaconNum++;
+            
+            if(self.currentBeaconNum == [self.path count]) {
+                // reached target
+                NSLog(@"Reached Target");
+                self.waypointBeaconData = nil;
+                [self.beaconManager stopMonitoringForRegion:self.scanRegion];
+                return;
+            }
+            
+            self.waypointBeaconData = self.building[@"beaconDetails"][[self.path[self.currentBeaconNum] intValue]];
+        }
+    }
 }
-*/
 
-- (void) performDisplaySearchViewController:(id)paramSender{
-    SearchViewController *searchView = [[SearchViewController alloc]initWithNibName:nil bundle:NULL];
-    [self.navigationController pushViewController:searchView animated:YES];
-}
 
 @end

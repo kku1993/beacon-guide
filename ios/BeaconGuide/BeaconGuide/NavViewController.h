@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NavViewController : UIViewController
+#import "BeaconGuideAPI.h"
+#import "ESTBeaconManager.h"
+#import "ESTBeaconRegion.h"
+
+@interface NavViewController : UIViewController <ESTBeaconManagerDelegate>
 
 - (id)initWithBuildingData:(NSDictionary *)building startBeaconID:(NSString *)startBeaconID endBeaconID:(NSString *)endBeaconID;
 

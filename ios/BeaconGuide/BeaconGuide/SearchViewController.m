@@ -60,7 +60,6 @@
         for(int i = 0; i < [beacons count]; i++) {
             NSDictionary *b = beacons[i];
             if([b[@"majorNumber"] intValue] == 1 && [b[@"minorNumber"] intValue] == 1) {
-                NSLog(@"%@", b);
                 self.currentBeaconData = b;
                 break;
             }
@@ -120,7 +119,7 @@
     
     // launch navigation to the selected beacon
     if(indexPath.section != 0) {
-        NavViewController *nav = [[NavViewController alloc] initWithBuildingData:self.building startBeaconID:self.currentBeaconData[@"beaconID"] endBeaconID:self.building[@"beaconDeatail"][indexPath.row][@"beaconID"]];
+        NavViewController *nav = [[NavViewController alloc] initWithBuildingData:self.building startBeaconID:self.currentBeaconData[@"beaconID"] endBeaconID:self.building[@"beaconDetails"][indexPath.row][@"beaconID"]];
         [self.navigationController pushViewController:nav animated:YES];
     }
 }

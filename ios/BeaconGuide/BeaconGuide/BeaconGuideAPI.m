@@ -53,7 +53,7 @@
     }
 }
 
-- (void)getPath :(NSString *)startBeaconID :(NSString *)endBeaconID :(NSString *)buildingID :(RequestCallback)successCB :(RequestCallback)failureCB {
+- (void)getPath :(NSString *)startBeaconID :(NSString *)endBeaconID :(NSString *)buildingID :(RequestCallback)successCB :(ErrorCallback)failureCB {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObject:startBeaconID forKey:@"startBeaconID"];
     [params setObject:endBeaconID forKey:@"endBeaconID"];
