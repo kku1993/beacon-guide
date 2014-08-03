@@ -43,6 +43,7 @@
 		6C5BEDFB198E220100368A60 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5BEDFA198E220100368A60 /* OpenGLES.framework */; };
 		6C5BEDFD198E220800368A60 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5BEDFC198E220800368A60 /* QuartzCore.framework */; };
 		6C5BEDFF198E221200368A60 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5BEDFE198E221200368A60 /* SystemConfiguration.framework */; };
+		89165FD8198E5BE800693F58 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89165FD7198E5BE800693F58 /* NavViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,8 @@
 		6C5BEDFA198E220100368A60 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		6C5BEDFC198E220800368A60 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6C5BEDFE198E221200368A60 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		89165FD6198E5BE800693F58 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
+		89165FD7198E5BE800693F58 /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +245,8 @@
 		6C504360198DED4A00DF881F /* viewsController */ = {
 			isa = PBXGroup;
 			children = (
+				89165FD6198E5BE800693F58 /* NavViewController.h */,
+				89165FD7198E5BE800693F58 /* NavViewController.m */,
 				6C504361198DEEA400DF881F /* LoginViewController.h */,
 				6C504362198DEEA400DF881F /* LoginViewController.m */,
 				6C504363198DEEA400DF881F /* LoginViewController.xib */,
@@ -395,6 +400,7 @@
 			files = (
 				6C504342198DED3700DF881F /* AppDelegate.m in Sources */,
 				6C50433E198DED3700DF881F /* main.m in Sources */,
+				89165FD8198E5BE800693F58 /* NavViewController.m in Sources */,
 				1B78F130198E1C940077AE84 /* BeaconGuideAPI.m in Sources */,
 				6C0ABFE4198DF80300E7B7C1 /* MapViewController.m in Sources */,
 				6C5BEDE2198E0B3800368A60 /* categoryTableViewCell.m in Sources */,

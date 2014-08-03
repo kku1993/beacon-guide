@@ -9,12 +9,14 @@
 #import "SearchViewController.h"
 #import "categoryTableViewCell.h"
 #import "GoogleMaps/GoogleMaps.h"
+#import "NavViewController.h"
+#import "MapViewController.h"
 
 @interface SearchViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *selectionTableView;
-@property (weak, nonatomic) IBOutlet UIScrollView *ScrollView;
 @property (strong, nonatomic) NSArray *locations;
 @property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, strong) UIButton *displayMapViewController;
 
 @end
 
@@ -33,31 +35,57 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
                                                                     style:UIBarButtonItemStyleDone target:nil action:nil];
-    self.navigationItem.rightBarButtonItem = rightButton;
-    
-//    self.ScrollView.contentSize = self.selectionTableView.frame.size;
-    
-    //search bar as header
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    self.selectionTableView.tableHeaderView= searchBar;
-    //UITableView *selectionView;
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyBoard)];
-    [self.view addGestureRecognizer:tap];
-    
-    //set each table view photo
-//    UINib *nib = [UINib nibWithNibName:@"categoryTableViewCell" bundle:nil];
-//    [self.selectionTableView registerNib:nib forCellReuseIdentifier:@"categoryTableViewCell"];
-    
-    self.title = NSLocalizedString(@"Beacon Guide", @"Beacon Guide");
-    
-   // self.selectionTableView.rowHeight = 320;
-    self.selectionTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.selectionTableView.delegate = self;
-    // self.selectionTableView.dataSource = self;
+    self.navigationItem.leftBarButtonItem = leftButton;
 
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"
+                                                                   style:UIBarButtonItemStyleDone target:nil action:nil];
+    
+    self.navigationItem.rightBarButtonItem = rightButton;
+    self.title = @"Indoor Map Category";
+    
+    self.displayMapViewController = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.displayMapViewController setTitle:@"Display indoor Map" forState:UIControlStateNormal];
+    
+    [self.displayMapViewController sizeToFit];
+    self.displayMapViewController.center = self.view.center;
+    
+    [self.displayMapViewController addTarget:self action:@selector(goNext) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:self.displayMapViewController];
+//    
+////    self.ScrollView.contentSize = self.selectionTableView.frame.size;
+//    
+//    //search bar as header
+//    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+//    self.selectionTableView.tableHeaderView= searchBar;
+//    //UITableView *selectionView;
+//    
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyBoard)];
+//    [self.view addGestureRecognizer:tap];
+//    
+//    //set each table view photo
+////    UINib *nib = [UINib nibWithNibName:@"categoryTableViewCell" bundle:nil];
+////    [self.selectionTableView registerNib:nib forCellReuseIdentifier:@"categoryTableViewCell"];
+//    
+//    self.title = NSLocalizedString(@"Beacon Guide", @"Beacon Guide");
+//    
+//   // self.selectionTableView.rowHeight = 320;
+//    self.selectionTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    self.selectionTableView.delegate = self;
+//    // self.selectionTableView.dataSource = self;
+
+    
+}
+
+- (void)goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)goNext {
+    MapViewController *mapViewController = [[MapViewController alloc]initWithNibName:nil bundle:NULL];
+    [self.navigationController pushViewController:mapViewController animated:YES];
     
 }
 
@@ -71,10 +99,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    CGPoint contentOffset = self.selectionTableView.contentOffset;
-    contentOffset.y += CGRectGetHeight(self.selectionTableView.tableHeaderView.frame);
-    self.selectionTableView.contentOffset = contentOffset;
-    [self.view endEditing:YES];
+    [self performSelector:@selector(goBack) withObject:nil afterDelay:5.0f];
 }
 
 - (void) dismissKeyBoard

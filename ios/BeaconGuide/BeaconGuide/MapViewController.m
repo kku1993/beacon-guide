@@ -40,6 +40,7 @@ UIPickerViewDataSource>
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title = @"Indoor Map";
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:37.78318
                                                             longitude:-122.403874

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SearchViewController.h"
+#import "NavViewController.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) UINavigationController *navigationController;
@@ -25,7 +26,7 @@
     // Override point for customization after application launch.
     
     //LoginViewController *vc = [[LoginViewController alloc]init];
-    SearchViewController *vc = [[SearchViewController alloc]init];
+    NavViewController *vc = [[SearchViewController alloc]init];
     //MapViewController *vc = [[MapViewController alloc]init];
     self.navigationController = [[UINavigationController alloc]initWithRootViewController:vc];
     
