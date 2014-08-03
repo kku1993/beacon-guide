@@ -7,8 +7,8 @@
     "description": "Art 1",
     "buildingID": "b1",
     "position": {
-      "lng": 123.456,
-      "lat": 23.234
+      "lng": -122.403846,
+      "lat": 37.783495
     }
   },
   "2": {
@@ -19,8 +19,8 @@
     "description": "Art 2",
     "buildingID": "b1",
     "position": {
-      "lng": 123.456,
-      "lat": 23.234
+      "lng": -122.404160,
+      "lat": 37.783139
     }
   },
   "3": {
@@ -31,8 +31,8 @@
     "description": "Art 3",
     "buildingID": "b1",
     "position": {
-      "lng": 123.456,
-      "lat": 23.234
+      "lng": -122.404526,
+      "lat": 37.782853 
     }
   }
 }
