@@ -12,6 +12,8 @@
 #import "GoogleMaps/GoogleMaps.h"
 #import "MapViewController.h"
 
+#import "BeaconGuideAPI.h"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

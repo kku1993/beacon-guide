@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B78F130198E1C940077AE84 /* BeaconGuideAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B78F12F198E1C940077AE84 /* BeaconGuideAPI.m */; };
 		491ED5658D954610A86DD1E5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 370A33CD190449448284AC79 /* libPods.a */; };
 		6C0ABFE4198DF80300E7B7C1 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0ABFE2198DF80300E7B7C1 /* MapViewController.m */; };
 		6C0ABFE5198DF80300E7B7C1 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C0ABFE3198DF80300E7B7C1 /* MapViewController.xib */; };
@@ -55,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B78F12E198E1C940077AE84 /* BeaconGuideAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconGuideAPI.h; sourceTree = "<group>"; };
+		1B78F12F198E1C940077AE84 /* BeaconGuideAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconGuideAPI.m; sourceTree = "<group>"; };
 		370A33CD190449448284AC79 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		68084DF8348C4291B024D8EC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		6C0ABFE1198DF80300E7B7C1 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
@@ -139,6 +142,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B78F12D198E1B590077AE84 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1B78F12E198E1C940077AE84 /* BeaconGuideAPI.h */,
+				1B78F12F198E1C940077AE84 /* BeaconGuideAPI.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		6C504325198DED3700DF881F = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +200,7 @@
 		6C504337198DED3700DF881F /* BeaconGuide */ = {
 			isa = PBXGroup;
 			children = (
+				1B78F12D198E1B590077AE84 /* API */,
 				6C504360198DED4A00DF881F /* viewsController */,
 				6C504340198DED3700DF881F /* AppDelegate.h */,
 				6C504341198DED3700DF881F /* AppDelegate.m */,
@@ -382,6 +395,7 @@
 			files = (
 				6C504342198DED3700DF881F /* AppDelegate.m in Sources */,
 				6C50433E198DED3700DF881F /* main.m in Sources */,
+				1B78F130198E1C940077AE84 /* BeaconGuideAPI.m in Sources */,
 				6C0ABFE4198DF80300E7B7C1 /* MapViewController.m in Sources */,
 				6C5BEDE2198E0B3800368A60 /* categoryTableViewCell.m in Sources */,
 				6C504369198DEF7100DF881F /* SearchViewController.m in Sources */,
