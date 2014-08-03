@@ -117,10 +117,7 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMidY(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetMidY(self.view.bounds))];
     bottomView.backgroundColor = [UIColor whiteColor];
     
-    THProgressView *bottomProgressView = [[THProgressView alloc] initWithFrame:CGRectMake(CGRectGetMidX(bottomView.frame) - progressViewSize.width / 2.0f,
-                                                                                          CGRectGetMidY(bottomProgressView.frame) - progressViewSize.height / 2.0f,
-                                                                                          progressViewSize.width,
-                                                                                          progressViewSize.height)];
+    THProgressView *bottomProgressView = [[THProgressView alloc] initWithFrame:CGRectMake(CGRectGetMidX(bottomView.frame) - progressViewSize.width / 2.0f,CGRectGetMidY(bottomProgressView.frame) - progressViewSize.height / 2.0f,progressViewSize.width,progressViewSize.height)];
     bottomProgressView.borderTintColor = DEFAULT_BLUE;
     bottomProgressView.progressTintColor = DEFAULT_BLUE;
     [bottomView addSubview:bottomProgressView];

@@ -28,6 +28,12 @@ UIPickerViewDataSource>
     UIPickerView *levelPickerView_;
 //    NSDictionary *levels_;
     NSArray *levels_;
+    GMSMarker *_currentLocationMarker;
+    GMSMarker *_nextDestMarker;
+    GMSMarker *_thirdMarker;
+    UIView *_contentView;
+    UIView *_contentView2;
+    UIView *_contentView3;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -57,6 +63,8 @@ UIPickerViewDataSource>
                                                             longitude:-122.403874
                                                                  zoom:18];
     
+    
+    
     // set backgroundColor, otherwise UIPickerView fades into the background
     self.view.backgroundColor = [UIColor grayColor];
     
@@ -68,6 +76,32 @@ UIPickerViewDataSource>
     mapView_.indoorDisplay.delegate = self;
     mapView_.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:mapView_];
+    
+    
+    _currentLocationMarker = [[GMSMarker alloc]init];
+    _currentLocationMarker.title = @"Starting point";
+    _currentLocationMarker.snippet = @"Current Store is: Victoria Secret";
+    _currentLocationMarker.position = CLLocationCoordinate2DMake(CLLocationDegrees latitude, <#CLLocationDegrees longitude#>);
+    _currentLocationMarker.map = mapView_;
+    NSLog(@"Starting point location: %@", _currentLocationMarker);
+    
+    
+    
+    _nextDestMarker = [[GMSMarker alloc]init];
+    _nextDestMarker.title = @"first stopping point";
+    _nextDestMarker.snippet = @"Current Store is: Nordstrom";
+    _nextDestMarker.position = CLLocationCoordinate2DMake(CLLocationDegrees latitude, <#CLLocationDegrees longitude#>);
+    _nextDestMarker.map = mapView_;
+    NSLog(@"First stopping point location: %@", _nextDestMarker);
+    
+    _thirdMarker = [[GMSMarker alloc]init];
+    _thirdMarker.title = @"last stopping point";
+    _thirdMarker.snippet = @"Current Store is: Nordstrom";
+    _thirdMarker.position = CLLocationCoordinate2DMake(<#CLLocationDegrees latitude#>, <#CLLocationDegrees longitude#>);
+    _thirdMarker.map = mapView_;
+    NSLog(@"First stopping point location: %@", _thirdMarker);
+    
+    
     
     // This UIPickerView will be populated with the levels of the active building.
     levelPickerView_ = [[UIPickerView alloc] init];
@@ -98,9 +132,13 @@ UIPickerViewDataSource>
                                metrics:metrics
                                views:views]];
     
+    mapView_.delegate = self;
+    self.view = mapView_;
     
     
-    //progress bar
+    _contentView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"step1"]];
+    _contentView2 =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"step2"]];
+    _contentView3 =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"step3"]];
     }
 
 
@@ -180,10 +218,22 @@ UIPickerViewDataSource>
     
 }
 
-- (void)updateProgress
-{
-   
+- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker:(GMSMarker *)marker{
+    if(marker == _currentLocationMarker){
+        return _contentView;
+    }
+    else if(marker == _nextDestMarker)
+    {
+        return _contentView2;
+    }
+    return nil;
 }
-
+                   
+- (UIView *)mapView:(GMSMapView *)mapView markerInfoContents:(GMSMarker *)marker{
+    if(marker == _thirdMarker){
+        return _contentView3;
+    }
+    return nil;
+}
 
 @end
