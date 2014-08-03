@@ -19,8 +19,11 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
 @property (strong, nonatomic) NSString *startBeaconID;
 @property (strong, nonatomic) NSString *endBeaconID;
 
-@property (strong, nonatomic) UIProgressView *progressBar;
+//@property (strong, nonatomic) UIProgressView *progressBar;
 @property (strong, nonatomic) THProgressView *progBar;
+@property (nonatomic, strong) NSArray *progressViews;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic) CGFloat progress;
 
 // path
 @property (strong, nonatomic) NSArray *path;
@@ -32,6 +35,8 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
 @property (strong, nonatomic) ESTBeaconManager *beaconManager;
 @property (strong, nonatomic) ESTBeaconRegion *scanRegion;
 @end
+
+
 
 @implementation NavViewController
 
@@ -105,7 +110,10 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
     topProgressView.progressTintColor = [UIColor whiteColor];
     [topBar addSubview:topProgressView];
     [self.view addSubview:topBar];
-}
+    
+    self.progressViews = @[ topProgressView];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];}
 
 
 -(void)progressUpdate {
@@ -116,13 +124,26 @@ static const CGSize progressViewSize = { 200.0f, 30.0f };
 
 - (void)setProgress:(NSNumber *)number
 {
-    [self.progressBar setProgress:number.floatValue animated:YES];
+    self.progress += 0.20f;
+    if (self.progress > 1.0f) {
+        self.progress = 0;
+    }
+    
+    [self.progressViews enumerateObjectsUsingBlock:^(THProgressView *progressView, NSUInteger idx, BOOL *stop) {
+        [progressView setProgress:self.progress animated:YES];
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 // beacon
