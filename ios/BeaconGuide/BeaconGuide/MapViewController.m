@@ -14,6 +14,8 @@
 UIPickerViewDelegate,
 UIPickerViewDataSource>
 
+@property (strong, nonatomic) NSDictionary *building;
+
 @end
 
 @implementation MapViewController{
@@ -32,6 +34,14 @@ UIPickerViewDataSource>
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+    }
+    return self;
+}
+
+- (id)initWithBuildingData:(NSDictionary *)building {
+    self = [super init];
+    if(self) {
+        self.building = building;
     }
     return self;
 }

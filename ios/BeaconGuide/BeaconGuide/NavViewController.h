@@ -10,4 +10,6 @@
 
 @interface NavViewController : UIViewController
 
+- (id)initWithBuildingData:(NSDictionary *)building startBeaconID:(NSString *)startBeaconID endBeaconID:(NSString *)endBeaconID;
+
 @end

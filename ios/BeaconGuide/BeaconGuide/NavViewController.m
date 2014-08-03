@@ -10,7 +10,12 @@
 #import "SearchViewController.h"
 
 @interface NavViewController ()
-    @property (nonatomic,strong) UIButton *displaySearchView;
+
+@property (nonatomic,strong) UIButton *displaySearchView;
+@property (strong, nonatomic) NSDictionary *building;
+@property (strong, nonatomic) NSString *startBeaconID;
+@property (strong, nonatomic) NSString *endBeaconID;
+
 @end
 
 @implementation NavViewController
@@ -20,6 +25,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+    }
+    return self;
+}
+
+- (id)initWithBuildingData:(NSDictionary *)building startBeaconID:(NSString *)startBeaconID endBeaconID:(NSString *)endBeaconID {
+    self = [super init];
+    if(self) {
+        self.building = building;
+        self.startBeaconID = startBeaconID;
+        self.endBeaconID = endBeaconID;
     }
     return self;
 }

@@ -10,4 +10,6 @@
 
 @interface MapViewController : UIViewController
 
+- (id)initWithBuildingData:(NSDictionary *)building;
+
 @end
