@@ -49,10 +49,22 @@
     [beaconData setObject:minorNumber forKey:@"minorNumber"];
    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:beaconData, @"beacon", nil];
-    NSLog(@"%@", params);
-
     if(successCB && failureCB) {
         [self httpPost:@"http://localhost/api/getBeaconBuilding" :params :successCB :failureCB];
+    }
+    else {
+        [NSException raise:@"No callback provided" format:@"No callback provided"];
+    }
+}
+
+- (void)getPath :(NSString *)startBeaconID :(NSString *)endBeaconID :(NSString *)buildingID :(RequestCallback)successCB :(RequestCallback)failureCB {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObject:startBeaconID forKey:@"startBeaconID"];
+    [params setObject:endBeaconID forKey:@"endBeaconID"];
+    [params setObject:buildingID forKey:@"buildingID"];
+    
+    if(successCB && failureCB) {
+        [self httpPost:@"http://localhost/api/getPath" :params :successCB :failureCB];
     }
     else {
         [NSException raise:@"No callback provided" format:@"No callback provided"];

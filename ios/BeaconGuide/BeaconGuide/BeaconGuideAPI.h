@@ -20,4 +20,6 @@ typedef void(^ErrorCallback)(AFHTTPRequestOperation *operation, NSError * error)
 
 -(void)getBeaconBuilding :(NSUUID *)UUID :(NSNumber *)majorNumber :(NSNumber *)minorNumber :(RequestCallback)successCB :(ErrorCallback)failureCB;
 
+- (void)getPath :(NSString *)startBeaconID :(NSString *)endBeaconID :(NSString *)buildingID :(RequestCallback)successCB :(RequestCallback)failureCB;
+
 @end
