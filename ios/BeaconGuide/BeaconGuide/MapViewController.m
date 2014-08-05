@@ -138,8 +138,8 @@ UIPickerViewDataSource>
     
     
     _contentView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"step1"]];
-    _contentView2 =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"step2"]];
-    _contentView3 =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"step3"]];
+//    _contentView2 =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"step2"]];
+//    _contentView3 =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"step3"]];
     }
 
 
@@ -223,18 +223,18 @@ UIPickerViewDataSource>
     if(marker == _currentLocationMarker){
         return _contentView;
     }
-    else if(marker == _nextDestMarker)
-    {
-        return _contentView2;
-    }
+//    else if(marker == _nextDestMarker)
+//    {
+//        return _contentView2;
+//    }
     return nil;
 }
                    
-- (UIView *)mapView:(GMSMapView *)mapView markerInfoContents:(GMSMarker *)marker{
-    if(marker == _thirdMarker){
-        return _contentView3;
-    }
-    return nil;
-}
+//- (UIView *)mapView:(GMSMapView *)mapView markerInfoContents:(GMSMarker *)marker{
+//    if(marker == _thirdMarker){
+//        return _contentView3;
+//    }
+//    return nil;
+//}
 
 @end
